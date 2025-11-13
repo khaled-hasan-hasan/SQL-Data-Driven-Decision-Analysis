@@ -24,21 +24,6 @@ SQL analytics project analyzing a movie rental database to extract customer beha
 - Which customers provide ratings vs. silent viewers?
 - How many millennials are in our customer base?
 
-**Key Queries:**
-```sql
--- Identify power users with satisfaction levels
-SELECT customer_id, AVG(rating), COUNT(rating), COUNT(movie_id)
-FROM renting
-GROUP BY customer_id
-HAVING COUNT(movie_id) > 7
-ORDER BY AVG(rating);
-
--- Find at-risk customers (low engagement)
-SELECT *
-FROM customers AS c
-WHERE 5 > (SELECT COUNT(*) FROM renting AS r WHERE r.customer_id = c.customer_id);
-
-
 ## 💡 Business Insights
 
 **Customer Behavior:**
@@ -84,8 +69,6 @@ WHERE 5 > (SELECT COUNT(*) FROM renting AS r WHERE r.customer_id = c.customer_id
 └── schema/
 └── database_schema.sql
 
-text
-
 ## 🚀 How to Use
 
 1. Clone repository: `git clone https://github.com/khaled-hasan-hasan/SQL-Data-Driven-Decision-Analysis.git`
@@ -117,3 +100,4 @@ MIT License
 ---
 
 ⭐ **Found this helpful? Give it a star!**
+
