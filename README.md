@@ -90,7 +90,7 @@ Specialized in SQL, Python, Power BI, and Business Intelligence. Transforming da
 
 **Skills:** SQL Server • Python • Power BI • Data Analysis • Business Intelligence
 
-**Connect:** [LinkedIn](#) • [GitHub](https://github.com/khaled-hasan-hasan) • [Email](#)
+**Connect:** [LinkedIn](www.linkedin.com/in/khaled-hasan-abdo) • [GitHub](https://github.com/khaled-hasan-hasan) • [Email](khaled.habdo@gmail.com)
 
 ---
 
