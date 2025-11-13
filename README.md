@@ -1,127 +1,119 @@
-# SQL Data-Driven Decision Analysis 📊
+# 🎬 Movie Rental Database Analysis
 
-## 📌 Project Overview
-This project demonstrates advanced SQL skills through real-world business scenarios. I analyze [اذكر نوع البيانات - مثلاً: sales data, customer behavior, inventory management] to extract actionable insights that drive business decisions.
+## 📌 Overview
+SQL analytics project analyzing a movie rental database to extract customer behavior insights, movie performance metrics, and revenue optimization strategies.
 
-## 🎯 Objectives
-- Analyze business performance metrics
-- Identify trends and patterns in data
-- Provide data-driven recommendations
-- Demonstrate SQL proficiency for business analytics
+**Business Context:** Data-driven decision analysis for a movie rental company's inventory, marketing, and customer retention strategies.
 
-## 🛠️ Technologies Used
-- **Database:** SQL Server / MySQL / PostgreSQL [حدد أيهما]
-- **Tools:** SQL Server Management Studio (SSMS) / DBeaver
-- **Skills:** Complex queries, CTEs, Window Functions, Joins, Aggregations, Subqueries
+## 🛠️ Tech Stack
+**Database:** SQL Server | **Skills:** Joins, Subqueries, CTEs, Window Functions, OLAP (CUBE/ROLLUP), Aggregations
 
-## 📂 Project Structure
-├── data/ # Sample datasets (if shareable)
-├── queries/ # SQL query files
-│ ├── 01_data_cleaning.sql
-│ ├── 02_exploratory_analysis.sql
-│ ├── 03_business_insights.sql
-├── results/ # Query outputs and visualizations
-├── documentation/ # Additional documentation
-└── README.md
-
-text
+## 📊 Database Schema
+- `renting` - Rental transactions & ratings
+- `customers` - Customer demographics
+- `movies` - Movie catalog (genre, price)
+- `actors` - Actor information
+- `actsin` - Movies-Actors relationships
 
 ## 🔍 Key Analyses
 
-### 1. [اسم التحليل الأول - مثلاً: Sales Performance Analysis]
-**Business Question:** [اذكر السؤال - مثلاً: Which products generate the highest revenue?]
+### 1. Customer Analytics
+**Questions Answered:**
+- Which customers are highly engaged (7+ rentals)?
+- Who are at-risk customers (< 5 rentals)?
+- Which customers provide ratings vs. silent viewers?
+- How many millennials are in our customer base?
 
-**SQL Techniques Used:**
-- JOIN operations
-- GROUP BY with aggregations
-- Window functions (RANK, ROW_NUMBER)
-
-**Key Findings:**
-- [نتيجة 1]
-- [نتيجة 2]
-
-📄 **Query:** [`sales_performance.sql`](queries/sales_performance.sql)
-
-### 2. [التحليل الثاني]
-[نفس الهيكل]
-
-### 3. [التحليل الثالث]
-[نفس الهيكل]
-
-## 💡 Sample Queries
-
-### Customer Segmentation Analysis
-WITH customer_metrics AS (
-SELECT
-customer_id,
-COUNT(order_id) as total_orders,
-SUM(order_amount) as total_spent,
-AVG(order_amount) as avg_order_value
-FROM orders
-WHERE order_date >= '2024-01-01'
+**Key Queries:**
+```sql
+-- Identify power users with satisfaction levels
+SELECT customer_id, AVG(rating), COUNT(rating), COUNT(movie_id)
+FROM renting
 GROUP BY customer_id
-)
-SELECT
-CASE
-WHEN total_spent >= 10000 THEN 'High Value'
-WHEN total_spent >= 5000 THEN 'Medium Value'
-ELSE 'Low Value'
-END as customer_segment,
-COUNT(*) as customer_count,
-AVG(total_spent) as avg_lifetime_value
-FROM customer_metrics
-GROUP BY customer_segment;
+HAVING COUNT(movie_id) > 7
+ORDER BY AVG(rating);
+
+-- Find at-risk customers (low engagement)
+SELECT *
+FROM customers AS c
+WHERE 5 > (SELECT COUNT(*) FROM renting AS r WHERE r.customer_id = c.customer_id);
+
+
+## 💡 Business Insights
+
+**Customer Behavior:**
+- Power users (7+ rentals) are prime loyalty program candidates
+- Low-engagement customers (< 5 rentals) need re-activation campaigns
+- Not all customers rate movies - incentivize feedback
+
+**Movie Performance:**
+- Movies with 8+ avg rating = premium catalog
+- Frequently rented titles (5+) drive consistent revenue
+- Drama genre has exceptional performers (9+ ratings)
+
+**Revenue & Market:**
+- Geographic preferences vary significantly - localize content
+- Top revenue movies should guide acquisition strategy
+- Country-level KPIs reveal market maturity
+
+**Content Strategy:**
+- Genre preferences differ by demographics and geography
+- Spanish market has distinct actor preferences
+- Young international talent (born > 1990) represents growth opportunity
+
+## 🎯 Recommendations
+
+1. **Loyalty Program** - Reward customers with 7+ rentals
+2. **Re-engagement Campaign** - Target < 5 rental customers
+3. **Feedback Incentives** - Offer discounts for ratings
+4. **Localized Marketing** - Tailor by country-genre preferences
+5. **Premium Tier** - Bundle 8+ rated movies
+6. **Inventory Priority** - Stock frequently rented titles
+7. **Age-Based Targeting** - Use demographic insights for recommendations
+
+## 📂 Project Structure
+├── README.md
+├── queries/
+│ ├── customer_analytics.sql
+│ ├── movie_performance.sql
+│ ├── revenue_analysis.sql
+│ ├── actor_preferences.sql
+│ └── advanced_olap.sql
+├── results/
+│ └── screenshots/
+└── schema/
+└── database_schema.sql
 
 text
 
-## 📊 Results & Insights
+## 🚀 How to Use
 
-[أضف screenshots أو جداول بالنتائج]
+1. Clone repository: `git clone https://github.com/khaled-hasan-hasan/SQL-Data-Driven-Decision-Analysis.git`
+2. Import database schema
+3. Run queries in order by category
+4. Review results and business insights
 
-**Key Business Recommendations:**
-1. [توصية 1]
-2. [توصية 2]
-3. [توصية 3]
+## 📚 Skills Demonstrated
 
-## 🎓 Skills Demonstrated
-- ✅ Complex SQL queries with multiple joins
-- ✅ Common Table Expressions (CTEs)
-- ✅ Window functions for advanced analytics
-- ✅ Data cleaning and transformation
-- ✅ Business intelligence and reporting
-- ✅ Performance optimization
+**SQL Techniques:** Complex JOINs • Correlated Subqueries • CTEs • Aggregations • OLAP (CUBE/ROLLUP/GROUPING SETS) • Window Functions • Set Operations (INTERSECT) • EXISTS/IN Operators
 
-## 🚀 How to Run
+**Business Analytics:** Customer Segmentation • KPI Tracking • Revenue Analysis • Geographic Analysis • Demographic Insights • Performance Evaluation
 
-1. Clone the repository:
-git clone https://github.com/khaled-hasan-hasan/SQL-Data-Driven-Decision-Analysis.git
+## 👨‍💻 About
 
-text
+**Khaled Hasan** - Data Analyst | ITI Power BI Developer Trainee
 
-2. Import the database schema (if provided):
--- Run schema.sql in your SQL environment
+Specialized in SQL, Python, Power BI, and Business Intelligence. Transforming data into actionable insights.
 
-text
+**Skills:** SQL Server • Python • Power BI • Data Analysis • Business Intelligence
 
-3. Execute queries in order:
-- Start with `01_data_cleaning.sql`
-- Then run analysis queries
-
-## 📈 Future Enhancements
-- [ ] Add more complex analytical queries
-- [ ] Integrate with visualization tools (Power BI/Tableau)
-- [ ] Implement stored procedures
-- [ ] Add performance optimization examples
-
-## 👨‍💻 About Me
-Data Analyst trainee at ITI (Information Technology Institute) specializing in SQL, Python, and Business Intelligence. Passionate about turning data into actionable insights.
-
-**Connect with me:**
-- LinkedIn: [Your LinkedIn]
-- Email: [Your Email]
-
-## 📝 License
-This project is open source and available under the [MIT License](LICENSE).
+**Connect:** [LinkedIn](#) • [GitHub](https://github.com/khaled-hasan-hasan) • [Email](#)
 
 ---
-⭐ If you find this project helpful, please consider giving it a star!
+
+## 📝 License
+MIT License
+
+---
+
+⭐ **Found this helpful? Give it a star!**
